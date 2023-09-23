@@ -1,7 +1,9 @@
 import { Close, DeleteOutlineOutlined } from '@mui/icons-material'
 import { Dialog  , Box , Typography, styled, InputBase, TextField, Button} from '@mui/material'
 import React, { useState } from 'react'
+import useApi from '../hooks/useApi'
 
+import {API_URLS} from "../services/api.urls"
 
 const dialogStyle = {
     height : "80%",
@@ -50,10 +52,16 @@ const Recipients = styled(Box)({
     }
 })
 const ComposeMail = ({openDialog , setOpenDialog}) => {
+    // Initialize custom hook
+
+    const sentEmailService = useApi(API_URLS.saveSentEmail)
+
     const apiKey = import.meta.env.VITE_REACT_APP_APIKEY;
     const username = import.meta.env.VITE_REACT_APP_USERNAME;
     const password = import.meta.env.VITE_REACT_APP_PASSWORD;
     const [data , setData] = useState({})
+
+
     const config = {
         ApiKey : apiKey,
         Host: 'smtp.elasticemail.com',
@@ -82,6 +90,22 @@ const ComposeMail = ({openDialog , setOpenDialog}) => {
             }).then(
               message => alert(message)
             ).catch(error => console.error(error));
+        }
+
+        const payload = {
+            To : data?.to,
+            From : "gagandeep280898@gmail.com",
+            Subject : data?.subject,
+            Body : data?.body,
+            date : new Date(),
+            image : '',
+            starred : false,
+            type : 'sent'
+        }
+        sentEmailService.call(payload)
+        if(!sentEmailService.error){
+            setOpenDialog(false)
+            setData({})
         }
         setOpenDialog(false)
     }
