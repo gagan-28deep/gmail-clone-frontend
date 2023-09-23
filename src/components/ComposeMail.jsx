@@ -50,12 +50,15 @@ const Recipients = styled(Box)({
     }
 })
 const ComposeMail = ({openDialog , setOpenDialog}) => {
+    const apiKey = import.meta.env.VITE_REACT_APP_APIKEY;
+    const username = import.meta.env.VITE_REACT_APP_USERNAME;
+    const password = import.meta.env.VITE_REACT_APP_PASSWORD;
     const [data , setData] = useState({})
     const config = {
-        ApiKey : "A61E7CCAC55546161E0AD87709409D4E775D53B2515BC81C1365EB0300B83C168A8D4E8C86AA44FC98DB677BFF490B7D",
+        ApiKey : apiKey,
         Host: 'smtp.elasticemail.com',
-        Username : "gagandeep280898@gmail.com",
-        Password : "95275ABE7EE0BB0E5D9C5769552B6703811B",
+        Username : username,
+        Password : password,
         Port : 2525,
         secure: false,
     }
