@@ -52,10 +52,12 @@ const Recipients = styled(Box)({
 const ComposeMail = ({openDialog , setOpenDialog}) => {
     const [data , setData] = useState({})
     const config = {
+        ApiKey : "A61E7CCAC55546161E0AD87709409D4E775D53B2515BC81C1365EB0300B83C168A8D4E8C86AA44FC98DB677BFF490B7D",
         Host: 'smtp.elasticemail.com',
-        Username : "gagan123@yopmail.com",
-        Password : "55A0A5E249A8E8FA505678477E69B92CEDDD",
+        Username : "gagandeep280898@gmail.com",
+        Password : "95275ABE7EE0BB0E5D9C5769552B6703811B",
         Port : 2525,
+        secure: false,
     }
     // Email Close
     const handleCloseEMail = async (e) =>{
