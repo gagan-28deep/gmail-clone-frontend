@@ -1,6 +1,10 @@
-import React , {useState} from 'react'
+import React , {Suspense, useState} from 'react'
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
+import Emails from '../components/Emails'
+import { Outlet } from 'react-router-dom'
+import SuspenseLoader from '../components/common/SuspenseLoader'
+import { Box } from '@mui/material'
 
 const Main = () => {
   // Open and close menu on button click
@@ -9,11 +13,19 @@ const Main = () => {
     setOpen(prevState => !prevState)
   }
   return (
-    <div>
+    <>
       <Header handleToggle={handleToggle}/>
-      <SideBar open = {open}/>
-      <div>Dispaly Emails</div>
-    </div>
+      <Box>
+        <SideBar open = {open}/>
+          
+          {/* <Emails open = {open} /> */}
+          
+          {/* We wrapped outlets components in the suspense , as outlet components are lazy loaded */}
+          <Suspense fallback = {<SuspenseLoader />}>
+            <Outlet context={{open}} />
+          </Suspense>
+      </Box>
+    </>
   )
 }
 

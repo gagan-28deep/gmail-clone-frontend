@@ -100,7 +100,9 @@ const ComposeMail = ({openDialog , setOpenDialog}) => {
             date : new Date(),
             image : '',
             starred : false,
-            type : 'sent'
+            type : 'sent',
+            name : "Gagandeep",
+            bin : false
         }
         sentEmailService.call(payload)
         if(!sentEmailService.error){
